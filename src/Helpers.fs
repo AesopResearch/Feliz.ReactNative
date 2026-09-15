@@ -1,6 +1,7 @@
 namespace Feliz.ReactNative
 
 open Fable.Core.JsInterop
+open Feliz
 
 type ReactComponent = Feliz.ReactComponentAttribute
 
@@ -10,6 +11,7 @@ type ColorScheme =
     | Unspecified
 
 module React =
+    [<Hook>]
     let useColorScheme () =
         match (import "useColorScheme" "react-native")() with
         | "light" -> Light
@@ -20,6 +22,7 @@ module React =
     /// <example>```
     /// let height, width, scale, fontScale = React.useWindowDimensions()
     /// ```</example>
+    [<Hook>]
     let useWindowDimensions () : float * float * float * float =
         let dimensions = (import "useWindowDimensions" "react-native")()
         dimensions?height, dimensions?width, dimensions?scale, dimensions?fontScale
